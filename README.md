@@ -1,69 +1,34 @@
-# React + TypeScript + Vite
+<h1 align="center">use-hook-scratch ⚡️</h1>
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+<p align="center">
+	<a href="https://vitejs.dev/"><img alt="Vite" src="https://img.shields.io/badge/Vite-7.1-646CFF?logo=vite&logoColor=white&style=for-the-badge"></a>
+	<a href="https://react.dev/"><img alt="React" src="https://img.shields.io/badge/React-19.1-61DAFB?logo=react&logoColor=000&style=for-the-badge"></a>
+	<a href="https://www.typescriptlang.org/"><img alt="TypeScript" src="https://img.shields.io/badge/TypeScript-5.8-3178C6?logo=typescript&logoColor=white&style=for-the-badge"></a>
+</p>
+<p align="center">Tiny experimental Vite + React + TypeScript demo exploring a Suspense resource pattern.</p>
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🚀 Quick start
 
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```powershell
+npm install
+npm run dev
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+Open http://localhost:5173.
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## 🧩 What this repo is about
 
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+- 🧪 A recreated/polyfilled `use()` hook integrating with React `<Suspense>` by throwing pending promises (`src/hooks/use.ts`).
+- 🧠 Simple in-memory cache to avoid recreating pending promises (`src/App.tsx`).
+
+🗂️ Files to peek at
+
+- 🧵 `src/hooks/use.ts` — recreated/polyfilled `use()`
+- 🧩 `src/App.tsx` — demo UI + cache
+- 🏁 `src/main.tsx` — app bootstrap
+
+## ⚠️ Quick note
+
+React 19 ships an official `use()` API for reading promises during render (Suspense-aware). Prefer React’s built-in `use()` over this custom demo — `src/hooks/use.ts` is for learning only. If you need caching/invalidation beyond Suspense, use a library later. Note: React’s `use()` isn’t just like any hook, we can use it in loops/conditions; pair it with `<Suspense>` and an `ErrorBoundary` for the best UX. See: https://react.dev/reference/react/use
